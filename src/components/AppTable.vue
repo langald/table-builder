@@ -16,7 +16,7 @@
         <th></th>
       </tr>
       <tr
-        v-for="item in displayData"
+        v-for="item in getDisplayData"
         :key="item.id"
         @click="$emit('onTrClick', { id: item.id })"
         :class="{ 'table-row--active': activeRow === item.id }"
@@ -58,10 +58,7 @@ export default {
   },
   computed: {
     ...mapState(["filters"]),
-    ...mapGetters(["getColumns", "getDisplayData"]),
-    displayData() {
-      return this.getDisplayData(1);
-    }
+    ...mapGetters(["getColumns", "getDisplayData"])
   },
   methods: {
     ...mapMutations(["setFilters"]),

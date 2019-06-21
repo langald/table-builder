@@ -9,7 +9,7 @@
       @onTrClick="setActiveRow($event)"
       :activeRow="activeRow"
     />
-    <pagination :pagination="testPagination" />
+    <pagination :pagination="getPagination" />
     <transition name="fade">
       <modal
         :item-id="editedItemId"
@@ -27,27 +27,33 @@ import TopPanel from "@/components/TopPanel";
 import Pagination from "@/components/Pagination";
 import Modal from "@/components/Modal";
 
-import { mapMutations, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Home",
   data() {
     return {
-      testPagination: {
-        current_page: 8,
-        last_page: 10
-      },
       isModalShown: false,
       editedItemId: -1,
       activeRow: -1
     };
   },
   components: { AppTable, TopPanel, Pagination, Modal },
+  computed: {
+    ...mapGetters(["getPagination"])
+  },
+  watch: {
+    "$route.query": {
+      handler(query, oldQuery) {
+        this.setPage(query.page);
+      }
+    }
+  },
   mounted() {
     this.getData("users");
   },
   methods: {
-    ...mapMutations(["removeData"]),
+    ...mapMutations(["removeData", "setPage"]),
     ...mapActions(["getData"]),
     setUpdateModal(e) {
       this.editedItemId = e.itemId;

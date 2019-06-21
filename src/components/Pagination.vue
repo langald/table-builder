@@ -1,30 +1,33 @@
 <template>
   <div class="pagination">
-    <button
-      type="button"
+    <router-link
+      :to="{ name: 'home', query: { page: 1 } }"
       class="pagination-link"
       v-if="pagination.current_page > 1"
+      tag="button"
     >
-      Back
-    </button>
+      First
+    </router-link>
 
-    <button
-      type="button"
+    <router-link
+      :to="{ name: 'home', query: { page } }"
       v-for="(page, i) in pagesNumber"
       :key="i"
       class="pagination-btn"
       :class="{ 'pagination-btn--active': page == pagination.current_page }"
+      tag="button"
     >
       {{ page }}
-    </button>
+    </router-link>
 
-    <button
-      type="button"
+    <router-link
+      :to="{ name: 'home', query: { page: pagination.last_page } }"
       class="pagination-link"
       v-if="pagination.current_page < pagination.last_page"
+      tag="button"
     >
-      Next
-    </button>
+      Last
+    </router-link>
   </div>
 </template>
 

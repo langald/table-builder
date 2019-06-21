@@ -14,10 +14,12 @@ export default new Vuex.Store({
       search: "",
       sortCol: "",
       sortType: "asc"
-    }
+    },
+    page: 1,
+    perPage: 4
   },
   getters: {
-    getDisplayData: state => page => {
+    getFilteredData(state) {
       let displayData = [...state.data];
 
       switch (state.filters.read) {
@@ -32,7 +34,6 @@ export default new Vuex.Store({
       let search = state.filters.search;
       if (search) {
         displayData = displayData.filter(item => {
-          //return item.name.includes(search);
           let contain;
           for (let key in item) {
             if (item.hasOwnProperty(key)) {
@@ -72,9 +73,15 @@ export default new Vuex.Store({
         });
       }
 
-      //console.log(displayData.length);
-
       return displayData;
+    },
+    getDisplayData(state, getters) {
+      let start =
+        state.page === 1 ? 0 : state.page * state.perPage - state.perPage;
+      let stop = start + state.perPage;
+
+      return getters.getFilteredData.slice(start, stop);
+      //console.log(getters.getFilteredData());
     },
     getColumns(state) {
       if (state.data.length) {
@@ -86,7 +93,13 @@ export default new Vuex.Store({
         return [];
       }
     },
-    getItemById: state => id => state.data.find(item => item.id === id)
+    getItemById: state => id => state.data.find(item => item.id === id),
+    getPagination(state, getters) {
+      return {
+        current_page: state.page,
+        last_page: Math.ceil(getters.getFilteredData.length / state.perPage)
+      };
+    }
   },
   mutations: {
     setData(state, payload) {
@@ -97,7 +110,7 @@ export default new Vuex.Store({
     },
     updateData(state, payload) {
       let editedItem = state.data.find(item => item.id === payload.id);
-      console.log(editedItem);
+      //console.log(editedItem);
       for (var key in payload) {
         if (payload.hasOwnProperty(key)) {
           editedItem[key] = payload[key];
@@ -106,7 +119,9 @@ export default new Vuex.Store({
     },
     removeData(state, payload) {
       let index = state.data.findIndex(item => item.id === payload.id);
-      state.data.splice(index, 1);
+      if (index >= 0) {
+        state.data.splice(index, 1);
+      }
     },
     setSetting(state, payload) {
       state.setting = payload;
@@ -116,6 +131,9 @@ export default new Vuex.Store({
     },
     setFilters(state, payload) {
       state.filters[payload.type] = payload.val;
+    },
+    setPage(state, payload) {
+      state.page = payload;
     }
   },
   actions: {

@@ -57,6 +57,8 @@ export default {
         type,
         val
       });
+
+      this.$router.push({ name: "home", query: { page: 1 } });
     }
   }
 };
