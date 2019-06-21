@@ -1,0 +1,42 @@
+html, body 
+  font-size: $html-font-size
+
+a, button
+  display: inline-block
+  cursor: pointer
+
+button:focus, input:focus 
+  outline: none
+
+#app 
+  font-family: $font-stack
+  font-size: $main-font-size
+  color: $black-color
+
+.page-title
+  color: $blue-color
+  padding: 40px 0 10px
+
+.btn
+  border: 2px solid $blue-color
+  border-radius: 4px
+  background: transparent
+  padding: 10px
+  transition: 0.5s
+  width: 250px
+  margin: 5px
+  &:hover, &--active
+    background: $blue-color
+    color: $white-color
+
+.input
+  border: 2px solid $grey-color
+  border-radius: 4px
+  background: transparent
+  padding: 10px
+  transition: 0.5s
+  width: 250px
+  margin: 5px
+  &:focus
+    background: $white-color
+
