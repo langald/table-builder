@@ -93,7 +93,7 @@ export default new Vuex.Store({
       state.data = payload;
     },
     addData(state, payload) {
-      state.data.push(payload);
+      state.data.unshift(payload);
     },
     updateData(state, payload) {
       let editedItem = state.data.find(item => item.id === payload.id);
@@ -103,6 +103,10 @@ export default new Vuex.Store({
           editedItem[key] = payload[key];
         }
       }
+    },
+    removeData(state, payload) {
+      let index = state.data.findIndex(item => item.id === payload.id);
+      state.data.splice(index, 1);
     },
     setSetting(state, payload) {
       state.setting = payload;

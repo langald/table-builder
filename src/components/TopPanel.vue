@@ -1,7 +1,16 @@
 <template>
   <div class="top-panel">
-    <button type="button" class="btn">Создать колонку</button>
-    <button type="button" class="btn">Удалить колонку</button>
+    <button type="button" class="btn" @click="$emit('onCreate')">
+      Создать запись
+    </button>
+    <button
+      type="button"
+      class="btn"
+      @click="$emit('onDelete')"
+      :disabled="$store.state.data.length === 1"
+    >
+      Удалить запись
+    </button>
     <button
       type="button"
       class="btn"

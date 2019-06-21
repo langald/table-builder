@@ -27,7 +27,13 @@
         >
           Save
         </button>
-        <button type="button" class="btn-save btn-save--close">Cancel</button>
+        <button
+          type="button"
+          class="btn-save btn-save--close"
+          @click="$emit('closeModal')"
+        >
+          Cancel
+        </button>
       </div>
     </form>
   </div>
@@ -77,6 +83,7 @@ export default {
       } else {
         this.addData({ ...this.formData, id: new Date().getTime() });
       }
+      this.$emit("closeModal");
     }
   }
 };

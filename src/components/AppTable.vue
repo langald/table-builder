@@ -13,16 +13,30 @@
             Sort
           </button>
         </th>
-        <th>options</th>
+        <th></th>
       </tr>
-      <tr v-for="item in displayData" :key="item.id">
+      <tr
+        v-for="item in displayData"
+        :key="item.id"
+        @click="$emit('onTrClick', { id: item.id })"
+        :class="{ 'table-row--active': activeRow === item.id }"
+      >
         <td v-for="(col, i) in getColumns" :key="i">{{ item[col] }}</td>
         <td>
           <div class="table-options">
-            <button type="button" class="table-btn table-btn--edit">
+            <button
+              type="button"
+              class="table-btn table-btn--edit"
+              @click="$emit('onEditBtn', { itemId: item.id })"
+            >
               Edit
             </button>
-            <button type="button" class="table-btn table-btn--delete">
+            <button
+              type="button"
+              class="table-btn table-btn--delete"
+              @click="$emit('onDeleteBtn', { id: item.id })"
+              :disabled="$store.state.data.length === 1"
+            >
               Delete
             </button>
           </div>
@@ -36,6 +50,12 @@
 import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   name: "AppTable",
+  props: {
+    activeRow: {
+      type: Number,
+      required: true
+    }
+  },
   computed: {
     ...mapState(["filters"]),
     ...mapGetters(["getColumns", "getDisplayData"]),

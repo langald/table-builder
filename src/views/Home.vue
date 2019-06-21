@@ -2,10 +2,21 @@
   <div class="container">
     <h1 class="page-title">{{ $store.state.title }}</h1>
 
-    <top-panel />
-    <app-table />
+    <top-panel @onCreate="setCreateModal" @onDelete="deleteActiveRow" />
+    <app-table
+      @onEditBtn="setUpdateModal($event)"
+      @onDeleteBtn="removeData($event)"
+      @onTrClick="setActiveRow($event)"
+      :activeRow="activeRow"
+    />
     <pagination :pagination="testPagination" />
-    <modal :item-id="-1" />
+    <transition name="fade">
+      <modal
+        :item-id="editedItemId"
+        v-if="isModalShown"
+        @closeModal="toggleModal"
+      />
+    </transition>
   </div>
 </template>
 
@@ -16,7 +27,7 @@ import TopPanel from "@/components/TopPanel";
 import Pagination from "@/components/Pagination";
 import Modal from "@/components/Modal";
 
-import { mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -25,7 +36,10 @@ export default {
       testPagination: {
         current_page: 8,
         last_page: 10
-      }
+      },
+      isModalShown: false,
+      editedItemId: -1,
+      activeRow: -1
     };
   },
   components: { AppTable, TopPanel, Pagination, Modal },
@@ -33,7 +47,25 @@ export default {
     this.getData("users");
   },
   methods: {
-    ...mapActions(["getData"])
+    ...mapMutations(["removeData"]),
+    ...mapActions(["getData"]),
+    setUpdateModal(e) {
+      this.editedItemId = e.itemId;
+      this.toggleModal();
+    },
+    setCreateModal() {
+      this.editedItemId = -1;
+      this.toggleModal();
+    },
+    toggleModal() {
+      this.isModalShown = !this.isModalShown;
+    },
+    setActiveRow(e) {
+      this.activeRow = e.id;
+    },
+    deleteActiveRow() {
+      this.removeData({ id: this.activeRow });
+    }
   }
 };
 </script>

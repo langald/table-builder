@@ -8,6 +8,10 @@ a, button
 button:focus, input:focus 
   outline: none
 
+button[disabled]
+  opacity: 0.4
+  cursor: not-allowed
+
 label
   display: block
   margin: 5px
@@ -58,7 +62,10 @@ label
   margin: 5px
   &--close
     background: $yellow-color
-  &[disabled]
-    background: $green-light-color
-    cursor: not-allowed
+
+.fade-enter-active, .fade-leave-active 
+  transition: opacity .5s
+.fade-enter, .fade-leave-to 
+  opacity: 0
+
 
