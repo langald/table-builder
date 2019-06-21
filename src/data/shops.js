@@ -1,5 +1,5 @@
 export default {
-  title: "Products",
+  title: "Shops",
   setting: {
     create: true,
     delete: true,
