@@ -6,7 +6,7 @@
       type="button"
       class="btn"
       :class="{ 'btn--active': filters.read === true }"
-      @click="toggleFilter('read', true)"
+      @click="setFilter('read', true)"
     >
       Прочитанные
     </button>
@@ -14,11 +14,16 @@
       type="button"
       class="btn"
       :class="{ 'btn--active': filters.read === false }"
-      @click="toggleFilter('read', false)"
+      @click="setFilter('read', false)"
     >
       Непрочитанные
     </button>
-    <input type="text" class="input" placeholder="Поиск" />
+    <input
+      type="text"
+      class="input"
+      placeholder="Поиск"
+      @input="setFilter('search', $event.target.value)"
+    />
   </div>
 </template>
 
@@ -32,7 +37,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setFilters"]),
-    toggleFilter(type, value) {
+    setFilter(type, value) {
       let val = value;
 
       if (type === "read") {

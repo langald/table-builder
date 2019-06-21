@@ -27,6 +27,29 @@ export default new Vuex.Store({
           break;
       }
 
+      let search = state.filters.search;
+      if (search) {
+        displayData = displayData.filter(item => {
+          //return item.name.includes(search);
+          let contain;
+          for (let key in item) {
+            if (item.hasOwnProperty(key)) {
+              if (
+                key !== "read" &&
+                item[key]
+                  .toString()
+                  .toLowerCase()
+                  .includes(search)
+              ) {
+                contain = true;
+              }
+            }
+          }
+
+          return contain;
+        });
+      }
+
       console.log(displayData.length);
 
       return displayData;
