@@ -8,6 +8,10 @@ a, button
 button:focus, input:focus 
   outline: none
 
+label
+  display: block
+  margin: 5px
+
 #app 
   font-family: $font-stack
   font-size: $main-font-size
@@ -39,4 +43,22 @@ button:focus, input:focus
   margin: 5px
   &:focus
     background: $white-color
+  &-group
+    &--hidden
+      display: none
+
+.btn-save
+  border: none
+  border-radius: 4px
+  background: $green-color
+  color: $white-color
+  padding: 10px
+  transition: 0.5s
+  width: 150px
+  margin: 5px
+  &--close
+    background: $yellow-color
+  &[disabled]
+    background: $green-light-color
+    cursor: not-allowed
 

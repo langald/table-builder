@@ -85,11 +85,24 @@ export default new Vuex.Store({
       } else {
         return [];
       }
-    }
+    },
+    getItemById: state => id => state.data.find(item => item.id === id)
   },
   mutations: {
     setData(state, payload) {
       state.data = payload;
+    },
+    addData(state, payload) {
+      state.data.push(payload);
+    },
+    updateData(state, payload) {
+      let editedItem = state.data.find(item => item.id === payload.id);
+      console.log(editedItem);
+      for (var key in payload) {
+        if (payload.hasOwnProperty(key)) {
+          editedItem[key] = payload[key];
+        }
+      }
     },
     setSetting(state, payload) {
       state.setting = payload;

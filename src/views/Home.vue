@@ -5,6 +5,7 @@
     <top-panel />
     <app-table />
     <pagination :pagination="testPagination" />
+    <modal :item-id="-1" />
   </div>
 </template>
 
@@ -13,6 +14,7 @@
 import AppTable from "@/components/AppTable";
 import TopPanel from "@/components/TopPanel";
 import Pagination from "@/components/Pagination";
+import Modal from "@/components/Modal";
 
 import { mapActions } from "vuex";
 
@@ -26,7 +28,7 @@ export default {
       }
     };
   },
-  components: { AppTable, TopPanel, Pagination },
+  components: { AppTable, TopPanel, Pagination, Modal },
   mounted() {
     this.getData("users");
   },
