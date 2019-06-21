@@ -4,14 +4,18 @@
   align-items: center
   justify-content: center
   &-btn
-    width: 36px
-    height: 36px
+    width: 30px
+    height: 30px
     font-size: 1.4rem
     border: 2px solid $blue-color
     border-radius: 50%
     background: transparent
-    margin: 6px
+    margin: 3px
     transition: 0.5s
+    @media only screen and(min-width: $screen-sm)
+      margin: 6px
+      width: 36px
+      height: 36px
     &:hover, &--active
       background: $blue-color
       color: $white-color

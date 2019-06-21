@@ -71,7 +71,7 @@ export default {
     ...mapMutations(["addData", "updateData"]),
     onFocus() {
       if (Object.keys(this.formData).length === 0) {
-        this.formData = { ...this.item, read: true };
+        this.formData = { ...this.item };
       }
     },
     onInput(field, e) {
@@ -81,7 +81,11 @@ export default {
       if (this.itemId >= 0) {
         this.updateData(this.formData);
       } else {
-        this.addData({ ...this.formData, id: new Date().getTime() });
+        this.addData({
+          ...this.formData,
+          id: new Date().getTime(),
+          read: true
+        });
       }
       this.$emit("closeModal");
     }

@@ -10,82 +10,72 @@ export default {
   data: [
     {
       id: 0,
-      name: "Book",
+      name: "Cortefiel",
       created: "01.01.2019",
-      quantity: 3,
-      price: 5000,
+      owner: "Graham",
       read: false
     },
     {
       id: 1,
-      name: "Glasses",
+      name: "Mexx",
       created: "01.02.2019",
-      quantity: 9,
-      price: 2000,
-      read: true
+      owner: "Howell",
+      read: false
     },
     {
       id: 2,
-      name: "Phone",
+      name: "Mango",
       created: "01.03.2019",
-      quantity: 44,
-      price: 30000,
-      read: true
+      owner: "Bauch",
+      read: false
     },
     {
       id: 3,
-      name: "TV",
+      name: "Nike",
       created: "01.04.2019",
-      quantity: 15,
-      price: 4000,
+      owner: "Lebsack",
       read: true
     },
     {
       id: 4,
-      name: "Blanket",
+      name: "Adidas",
       created: "01.05.2019",
-      quantity: 6,
-      price: 5000,
+      owner: "Dietrich",
       read: true
     },
     {
       id: 5,
-      name: "Chocolate",
+      name: "Platinum",
       created: "01.06.2019",
-      quantity: 52,
-      price: 6000,
+      owner: "Schulist",
       read: true
     },
     {
       id: 6,
-      name: "Meat",
+      name: "Grazie",
       created: "01.07.2019",
-      quantity: 23,
-      price: 7000,
+      owner: "Skiles",
       read: true
     },
     {
       id: 7,
-      name: "Ticket",
+      name: "Avrora",
       created: "01.08.2019",
-      quantity: 74,
-      price: 8000,
+      owner: "Summit",
       read: true
     },
     {
       id: 8,
-      name: "Water",
+      name: "Sman",
       created: "01.09.2019",
-      quantity: 48,
-      price: 9000,
+      owner: "Dayna",
       read: true
     },
     {
       id: 9,
-      name: "Pop-corn",
+      name: "Zugo",
       created: "01.10.2019",
-      quantity: 80,
-      price: 10000,
+      owner: "DuBuque",
       read: true
     }
   ]

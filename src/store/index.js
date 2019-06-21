@@ -147,6 +147,9 @@ export default new Vuex.Store({
         case "products":
           table = require("@/data/products").default;
           break;
+        case "shops":
+          table = require("@/data/shops").default;
+          break;
       }
 
       store.commit("setTitle", table.title);

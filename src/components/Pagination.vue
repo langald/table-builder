@@ -41,7 +41,7 @@ export default {
     },
     offset: {
       type: Number,
-      default: 4
+      default: 2
     }
   },
   computed: {
