@@ -11,12 +11,14 @@ export default new Vuex.Store({
     data: [],
     filters: {
       read: "",
-      search: ""
+      search: "",
+      sortCol: "",
+      sortType: "asc"
     }
   },
   getters: {
     getDisplayData: state => page => {
-      let displayData = state.data;
+      let displayData = [...state.data];
 
       switch (state.filters.read) {
         case true:
@@ -50,7 +52,27 @@ export default new Vuex.Store({
         });
       }
 
-      console.log(displayData.length);
+      let sortCol = state.filters.sortCol;
+      let sortType = state.filters.sortType;
+      if (sortCol) {
+        displayData.sort((a, b) => {
+          if (sortType === "asc") {
+            return a[sortCol] > b[sortCol]
+              ? 1
+              : b[sortCol] > a[sortCol]
+              ? -1
+              : 0;
+          } else {
+            return a[sortCol] > b[sortCol]
+              ? -1
+              : b[sortCol] > a[sortCol]
+              ? 1
+              : 0;
+          }
+        });
+      }
+
+      //console.log(displayData.length);
 
       return displayData;
     },

@@ -4,7 +4,12 @@
       <tr>
         <th v-for="(col, i) in getColumns" :key="i">
           {{ col
-          }}<button type="button" class="table-btn table-btn--sort">
+          }}<button
+            type="button"
+            class="table-btn table-btn--sort"
+            :class="{ 'table-btn--sort-active': filters.sortCol === col }"
+            @click="setFilter(col)"
+          >
             Sort
           </button>
         </th>
@@ -28,13 +33,29 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   name: "AppTable",
   computed: {
+    ...mapState(["filters"]),
     ...mapGetters(["getColumns", "getDisplayData"]),
     displayData() {
       return this.getDisplayData(1);
+    }
+  },
+  methods: {
+    ...mapMutations(["setFilters"]),
+    setFilter(col) {
+      let sortType = this.filters.sortType === "asc" ? "dsc" : "asc";
+
+      this.setFilters({
+        type: "sortCol",
+        val: col
+      });
+      this.setFilters({
+        type: "sortType",
+        val: sortType
+      });
     }
   }
 };
